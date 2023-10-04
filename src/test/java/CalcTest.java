@@ -7,10 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalcTest {
 
-    @Test
-    public void calcShouldWork() {
+    Calc calc = new Calc();
 
-        Calc calc = new Calc();
+    @Test
+    public void sumShouldWork() {
+
 
         assertTrue(calc.sum(2, 3) == 5);
         assertFalse(calc.sum(8, 5) == 11);
@@ -19,7 +20,48 @@ public class CalcTest {
     }
 
     @Test
-    public void assertivas() {
+    public void divisionShouldWork() {
+
+        float result = calc.division(6, 2);
+
+        assertEquals(3, result);
+    }
+
+    @Test
+    public void divisionShouldReturnNegativeNumber() {
+
+        float result = calc.division(6, -2);
+
+        assertEquals(-3, result);
+    }
+
+    @Test
+    public void divisionShouldReturnDecimalNumber() {
+
+        float result = calc.division(10, 3);
+
+        assertEquals(3.3333332538604736, result);
+        assertEquals(3.33, result, 0.01); // using delta
+    }
+
+    @Test
+    public void divisionShouldReturnZeroWithDenZero() {
+
+        float result = calc.division(0, 2);
+
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void divisionShouldThrowExceptionWhenZeroDivision() {
+        //todo next class
+        float result = calc.division(0, 2);
+
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void assertionsShouldWork() {
 
         assertEquals("Home", "Home");
         assertNotEquals("Home", "home");

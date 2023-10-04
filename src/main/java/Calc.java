@@ -4,4 +4,8 @@ public class Calc {
         return a + b;
     }
 
+    public float division(int num, int den) {
+        return (float) num / den;
+    }
+
 }
