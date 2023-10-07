@@ -7,5 +7,4 @@ public class Calc {
     public float division(int num, int den) {
         return (float) num / den;
     }
-
 }

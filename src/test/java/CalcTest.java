@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalcTest {
 
-    Calc calc = new Calc();
+    private Calc calc = new Calc();
+
+    @BeforeEach
+    public void setup() {
+        System.out.println("ˆˆˆˆ");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.out.println("vvv");
+    }
+
+    @BeforeAll // should be static
+    public static void setupAll() {
+        System.out.println("---Before All ---");
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        System.out.println("--- After All ---");
+    }
 
     @Test
     public void sumShouldWork() {
@@ -53,11 +73,23 @@ public class CalcTest {
     }
 
     @Test
-    public void divisionShouldThrowExceptionWhenZeroDivision() {
-        //todo next class
-        float result = calc.division(0, 2);
+    public void divisionShouldThrowExceptionWhenZeroDivision_junit4() {
 
-        assertEquals(0, result);
+        try {
+            float result = 10 / 0;
+            fail(); // if not launch exception
+        } catch (ArithmeticException arithmeticException) {
+            assertEquals("/ by zero", arithmeticException.getMessage());
+        }
+    }
+
+    @Test
+    public void divisionShouldThrowExceptionWhenZeroDivision_junit5() {
+
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> {
+            float result = 10 / 0;
+        });
+        assertEquals("/ by zero", exception.getMessage());
     }
 
     @Test
