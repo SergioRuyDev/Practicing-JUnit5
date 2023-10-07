@@ -1,0 +1,29 @@
+
+;
+java:S5786"Remove this 'public' modifier.(›¢æ¹8Æù’Õ¯1
+;
+java:S5786"Remove this 'public' modifier.(ñÇ¹Ï8Æù’Õ¯1
+@
+java:S5786"Remove this 'public' modifier.(ôÌ³­ûÿÿÿÿ8Æù’Õ¯1
+@
+java:S5786'"Remove this 'public' modifier.(ôÛá¢ÿÿÿÿÿ8Æù’Õ¯1
+@
+java:S57860"Remove this 'public' modifier.(Òˆ·Ãüÿÿÿÿ8Çù’Õ¯1
+;
+java:S57868"Remove this 'public' modifier.(‹ÛòË8Çù’Õ¯1
+@
+java:S5786@"Remove this 'public' modifier.(óñ›œıÿÿÿÿ8¡ï¤Õ¯1
+;
+java:S5786"Remove this 'public' modifier.(äÛ˜„8›êÉÕ¯1
+6
+java:S5785"Use assertEquals instead.(§àÇê8Çù’Õ¯1
+>
+java:S5785"Use assertNotEquals instead.(©Ø¹—ıÿÿÿÿ8Çù’Õ¯1
+;
+java:S5785"Use assertEquals instead.(Ãˆ¦ÿÿÿÿÿ8Çù’Õ¯1
+T
+java:S3415B"2Change this assertion to not compare two literals.(Úî³ûÿÿÿÿ8Èù’Õ¯1
+m
+java:S5863B"KReplace this assertion to not have the same actual and expected expression.(Úî³ûÿÿÿÿ8Èù’Õ¯1
+O
+java:S3415C"2Change this assertion to not compare two literals.(ÃÄÒì8Èù’Õ¯1
