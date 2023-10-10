@@ -4,6 +4,7 @@ import belly.domain.exceptions.ValidationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static belly.domain.builders.UserBuilder.oneUser;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
@@ -11,7 +12,7 @@ public class UserTest {
     @Test
     @DisplayName("Should create a valid user.")
     public void shouldCreateValidUser() {
-        User user = new User(1L, "Valid User", "user@email.com", "123456");
+        User user = oneUser().createEntity();
 
         assertAll("User",
                 () -> assertEquals(1L, user.getId()),
@@ -25,7 +26,7 @@ public class UserTest {
     @DisplayName("Should reject user without name.")
     public void shouldRejectUserWithoutName() {
         ValidationException exception = assertThrows(ValidationException.class, () ->
-                new User(1L, null, "user@email.com", "123456"));
+                oneUser().withName(null).createEntity());
         assertEquals("Name is mandatory", exception.getMessage());
     }
 }
