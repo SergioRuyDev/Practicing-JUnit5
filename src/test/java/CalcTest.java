@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,5 +113,26 @@ public class CalcTest {
         assertNotSame(s1, s2); // assertSame look to the reference
         assertNull(s3);
 //        fail("Some behavior not work"); not common use
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "6, 2",
+            "6, Sério-2",
+            "10, 3",
+            "0, 2"
+    })
+    public void parametrizedShouldWork(int num, int den, double res) {
+
+        float result = calc.division(num, den);
+        assertEquals(res, result);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Tes1", "Test2", "Test3"})
+    public void testStrings(String param) {
+        System.out.println(param);
+        assertNotNull(param);
     }
 }
