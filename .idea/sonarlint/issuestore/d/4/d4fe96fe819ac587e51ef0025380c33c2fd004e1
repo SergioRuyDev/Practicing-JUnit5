@@ -1,7 +1,10 @@
 
 @
-java:S5786"Remove this 'public' modifier.(Ø¡½øÿÿÿÿ8ãÖªÕ°1
+java:S5786"Remove this 'public' modifier.(Ø¡½øÿÿÿÿ8Å‘ÉË±1
 @
-java:S5786"Remove this 'public' modifier.(´÷µ‘ûÿÿÿÿ8ãÖªÕ°1
+java:S5786"Remove this 'public' modifier.(´÷µ‘ûÿÿÿÿ8Æ‘ÉË±1
 :
-java:S5786	"Remove this 'public' modifier.(òŠ8ãÖªÕ°1
+java:S5786
+"Remove this 'public' modifier.(òŠ8Æ‘ÉË±1
+
+java:S5778"bRefactor the code of the lambda to have only one invocation possibly throwing a runtime exception.(ƒº¢8Ç‘ÉË±1

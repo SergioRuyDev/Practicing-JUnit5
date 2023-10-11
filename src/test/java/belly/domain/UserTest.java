@@ -29,4 +29,20 @@ public class UserTest {
                 oneUser().withName(null).createEntity());
         assertEquals("Name is mandatory", exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Should reject user without e-mail.")
+    public void shouldRejectUserWithoutEmail() {
+        ValidationException exception = assertThrows(ValidationException.class, () ->
+                oneUser().withEmail(null).createEntity());
+        assertEquals("Email is mandatory", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should reject user without password.")
+    public void shouldRejectUserWithoutPassword() {
+        ValidationException exception = assertThrows(ValidationException.class, () ->
+                oneUser().withPassword(null).createEntity());
+        assertEquals("password is mandatory", exception.getMessage());
+    }
 }

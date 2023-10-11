@@ -1,5 +1,7 @@
 package belly.domain.builders;
 
+import belly.domain.User;
+
 import static java.lang.String.format;
 
 import java.lang.reflect.Field;
@@ -17,7 +19,7 @@ import java.util.Set;
  * @author Sergio Ruy
  *
  */
-public class BuilderMaster { // todo: translate for english
+public class BuilderMaster {
 
     Set<String> listImports = new HashSet<String>();
 
@@ -31,7 +33,7 @@ public class BuilderMaster { // todo: translate for english
         builder.append(format("public class %s {\n", className));
 
         List<Field> declaredFields = getClassFields(classed).stream()
-                .filter(campo -> !campo.getName().equals("serialVersionUID") && !Modifier.isStatic(campo.getModifiers()))
+                .filter(field -> !field.getName().equals("serialVersionUID") && !Modifier.isStatic(field.getModifiers()))
                 .toList();
         declaredFields.forEach(field -> {
             if (field.getType().getSimpleName().equals("List"))
@@ -42,14 +44,14 @@ public class BuilderMaster { // todo: translate for english
 
         builder.append(format("\n\tprivate %s(){}\n\n", className));
 
-        builder.append(format("\tpublic static %s um%s() {\n", className, classed.getSimpleName()));
+        builder.append(format("\tpublic static %s one%s() {\n", className, classed.getSimpleName()));
         builder.append(format("\t\t%s builder = new %s();\n", className, className));
         builder.append("\t\tinitializeStandardAttributes(builder);\n");
         builder.append("\t\treturn builder;\n");
         builder.append("\t}\n\n");
 
         builder.append(format("\tprivate static void initializeStandardAttributes(%s builder) {\n", className));
-        declaredFields.forEach(campo -> builder.append(format("\t\tbuilder.%s = %s;\n", campo.getName(), getDefaultParameter(campo))));
+        declaredFields.forEach(field -> builder.append(format("\t\tbuilder.%s = %s;\n", field.getName(), getDefaultParameter(field))));
         builder.append("\t}\n\n");
 
         for (Field field : declaredFields) {
@@ -60,7 +62,7 @@ public class BuilderMaster { // todo: translate for english
                         className, field.getName().substring(0, 1).toUpperCase(), field.getName().substring(1), getGenericSimpleName(field), field.getName()));
                 builder.append(format("\t\tthis.%s = Arrays.asList(%s);\n", field.getName(), field.getName()));
             } else {
-                builder.append(format("\tpublic %s com%s%s(%s %s) {\n",
+                builder.append(format("\tpublic %s with%s%s(%s %s) {\n",
                         className, field.getName().substring(0, 1).toUpperCase(), field.getName().substring(1), field.getType().getSimpleName(), field.getName()));
                 builder.append(format("\t\tthis.%s = %s;\n", field.getName(), field.getName()));
             }
@@ -68,16 +70,16 @@ public class BuilderMaster { // todo: translate for english
             builder.append("\t}\n\n");
         }
 
-        builder.append(format("\tpublic %s agora() {\n", classed.getSimpleName()));
+        builder.append(format("\tpublic %s createEntity() {\n", classed.getSimpleName()));
         builder.append(format("\t\treturn new %s(", classed.getSimpleName()));
         boolean first = true;
-        for (Field campo : declaredFields) {
+        for (Field field : declaredFields) {
             if(first) {
                 first = false;
             } else {
                 builder.append(", ");
             }
-            builder.append(campo.getName());
+            builder.append(field.getName());
         }
         builder.append(");\n\t}\n");
 
@@ -92,16 +94,17 @@ public class BuilderMaster { // todo: translate for english
     }
 
     @SuppressWarnings("rawtypes")
-    private String getGenericSimpleName(Field campo) {
-        ParameterizedType stringListType = (ParameterizedType) campo.getGenericType();
+    private String getGenericSimpleName(Field field) {
+        ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
         return ((Class) stringListType.getActualTypeArguments()[0]).getSimpleName();
     }
 
     @SuppressWarnings("rawtypes")
-    public List<Field> getClassFields(Class classe) {
+    public List<Field> getClassFields(Class aClass) {
+
         List<Field> fields = new ArrayList<Field>();
-        fields.addAll(Arrays.asList(classe.getDeclaredFields()));
-        Class superClass = classe.getSuperclass();
+        fields.addAll(Arrays.asList(aClass.getDeclaredFields()));
+        Class superClass = aClass.getSuperclass();
         if (superClass != Object.class) {
             List<Field> fieldsSC = Arrays.asList(superClass.getDeclaredFields());
             fields.addAll(fieldsSC);
@@ -109,21 +112,21 @@ public class BuilderMaster { // todo: translate for english
         return fields;
     }
 
-    public String getDefaultParameter(Field campo) {
-        String tipo = campo.getType().getSimpleName();
-        if (tipo.equals("int") || tipo.equals("Integer")) {
+    public String getDefaultParameter(Field field) {
+        String type = field.getType().getSimpleName();
+        if (type.equals("int") || type.equals("Integer")) {
             return "0";
         }
-        if (tipo.equalsIgnoreCase("long")) {
+        if (type.equalsIgnoreCase("long")) {
             return "0L";
         }
-        if (tipo.equalsIgnoreCase("double") || tipo.equalsIgnoreCase("float")) {
+        if (type.equalsIgnoreCase("double") || type.equalsIgnoreCase("float")) {
             return "0.0";
         }
-        if (tipo.equalsIgnoreCase("boolean")) {
+        if (type.equalsIgnoreCase("boolean")) {
             return "false";
         }
-        if (tipo.equals("String")) {
+        if (type.equals("String")) {
             return "\"\"";
         }
         return "null";
@@ -136,6 +139,6 @@ public class BuilderMaster { // todo: translate for english
 
     public static void main(String[] args) {
         BuilderMaster master = new BuilderMaster();
-        master.generateCodeClass(null);
+        master.generateCodeClass(User.class);
     }
 }

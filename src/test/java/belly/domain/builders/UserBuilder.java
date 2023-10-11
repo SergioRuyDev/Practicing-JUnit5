@@ -3,14 +3,12 @@ package belly.domain.builders;
 import belly.domain.User;
 
 public class UserBuilder {
-
     private Long id;
     private String name;
     private String email;
     private String password;
 
-    private UserBuilder() {
-    }
+    private UserBuilder(){}
 
     public static UserBuilder oneUser() {
         UserBuilder builder = new UserBuilder();
@@ -25,23 +23,23 @@ public class UserBuilder {
         builder.password = "123456";
     }
 
-    public UserBuilder withId(Long param) {
-        id = param;
+    public UserBuilder withId(Long id) {
+        this.id = id;
         return this;
     }
 
-    public UserBuilder withName(String param) {
-        name = param;
+    public UserBuilder withName(String name) {
+        this.name = name;
         return this;
     }
 
-    public UserBuilder withEmail(String param) {
-        email = param;
+    public UserBuilder withEmail(String email) {
+        this.email = email;
         return this;
     }
 
-    public UserBuilder withPassword(String param) {
-        password = param;
+    public UserBuilder withPassword(String password) {
+        this.password = password;
         return this;
     }
 
