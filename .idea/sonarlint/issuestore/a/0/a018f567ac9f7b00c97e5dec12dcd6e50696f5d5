@@ -1,29 +1,33 @@
 
 ;
-java:S5786!"Remove this 'public' modifier.(›¢æ¹8ôÏÈÑ°1
+java:S5786$"Remove this 'public' modifier.(›¢æ¹8ÂÂ¬ç¶1
 ;
-java:S5786+"Remove this 'public' modifier.(ñÇ¹Ï8ôÏÈÑ°1
+java:S5786."Remove this 'public' modifier.(ñÇ¹Ï8ÂÂ¬ç¶1
 @
-java:S57863"Remove this 'public' modifier.(ôÌ³­ûÿÿÿÿ8ôÏÈÑ°1
+java:S57866"Remove this 'public' modifier.(ôÌ³­ûÿÿÿÿ8ÃÂ¬ç¶1
 @
-java:S5786;"Remove this 'public' modifier.(ôÛá¢ÿÿÿÿÿ8ôÏÈÑ°1
+java:S5786>"Remove this 'public' modifier.(ôÛá¢ÿÿÿÿÿ8ÃÂ¬ç¶1
 @
-java:S5786D"Remove this 'public' modifier.(Òˆ·Ãüÿÿÿÿ8ôÏÈÑ°1
+java:S5786G"Remove this 'public' modifier.(Òˆ·Ãüÿÿÿÿ8ÃÂ¬ç¶1
 ;
-java:S5786L"Remove this 'public' modifier.(¦±œü8ôÏÈÑ°1
+java:S5786O"Remove this 'public' modifier.(¦±œü8ÃÂ¬ç¶1
 ;
-java:S5786W"Remove this 'public' modifier.(»èà¦8ôÏÈÑ°1
+java:S5786Z"Remove this 'public' modifier.(»èà¦8ÃÂ¬ç¶1
 @
-java:S5786`"Remove this 'public' modifier.(óñ›œıÿÿÿÿ8ôÏÈÑ°1
+java:S5786c"Remove this 'public' modifier.(óñ›œıÿÿÿÿ8ÃÂ¬ç¶1
+@
+java:S5786}"Remove this 'public' modifier.(Š·ä¼ùÿÿÿÿ8ÃÂ¬ç¶1
+A
+java:S5786†"Remove this 'public' modifier.(¥£ªûÿÿÿÿ8ÃÂ¬ç¶1
 6
-java:S5785$"Use assertEquals instead.(§àÇê8õÏÈÑ°1
+java:S5785'"Use assertEquals instead.(§àÇê8ÄÂ¬ç¶1
 >
-java:S5785%"Use assertNotEquals instead.(©Ø¹—ıÿÿÿÿ8õÏÈÑ°1
+java:S5785("Use assertNotEquals instead.(©Ø¹—ıÿÿÿÿ8ÄÂ¬ç¶1
 ;
-java:S5785&"Use assertEquals instead.(Ãˆ¦ÿÿÿÿÿ8õÏÈÑ°1
+java:S5785)"Use assertEquals instead.(Ãˆ¦ÿÿÿÿÿ8ÄÂ¬ç¶1
 T
-java:S3415b"2Change this assertion to not compare two literals.(Úî³ûÿÿÿÿ8öÏÈÑ°1
+java:S3415e"2Change this assertion to not compare two literals.(Úî³ûÿÿÿÿ8ÆÂ¬ç¶1
 m
-java:S5863b"KReplace this assertion to not have the same actual and expected expression.(Úî³ûÿÿÿÿ8öÏÈÑ°1
+java:S5863e"KReplace this assertion to not have the same actual and expected expression.(Úî³ûÿÿÿÿ8ÆÂ¬ç¶1
 O
-java:S3415c"2Change this assertion to not compare two literals.(ÃÄÒì8öÏÈÑ°1
+java:S3415f"2Change this assertion to not compare two literals.(ÃÄÒì8ÆÂ¬ç¶1

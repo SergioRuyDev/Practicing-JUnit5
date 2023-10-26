@@ -117,10 +117,10 @@ public class CalcTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "6, 2",
-            "6, Sério-2",
-            "10, 3",
-            "0, 2"
+            "6, 2, 3",
+            "6, -2, -3",
+            "10, 3, 3.3333332538604736",
+            "0, 2, 0"
     })
     public void parametrizedShouldWork(int num, int den, double res) {
 
