@@ -1,6 +1,6 @@
 package belly.builders;
 
-import belly.User;
+import belly.domain.User;
 import belly.domain.Account;
 
 public class AccountBuilder {

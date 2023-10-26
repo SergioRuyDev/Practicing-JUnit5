@@ -1,6 +1,5 @@
 package belly.domain;
 
-import belly.User;
 import belly.exceptions.ValidationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

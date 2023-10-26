@@ -1,6 +1,5 @@
 package belly.builders;
 
-import belly.User;
 import belly.domain.Account;
 
 import static java.lang.String.format;

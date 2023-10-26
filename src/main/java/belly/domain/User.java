@@ -1,4 +1,4 @@
-package belly;
+package belly.domain;
 
 import belly.exceptions.ValidationException;
 

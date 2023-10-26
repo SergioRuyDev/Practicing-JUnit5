@@ -1,6 +1,6 @@
 package belly.builders;
 
-import belly.User;
+import belly.domain.User;
 
 public class UserBuilder {
     private Long id;
