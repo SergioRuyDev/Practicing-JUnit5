@@ -1,4 +1,4 @@
-package belly.domain.exceptions;
+package belly.exceptions;
 
 public class ValidationException extends RuntimeException {
 

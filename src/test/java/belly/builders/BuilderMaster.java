@@ -1,6 +1,7 @@
-package belly.domain.builders;
+package belly.builders;
 
-import belly.domain.User;
+import belly.User;
+import belly.domain.Account;
 
 import static java.lang.String.format;
 
@@ -139,6 +140,6 @@ public class BuilderMaster {
 
     public static void main(String[] args) {
         BuilderMaster master = new BuilderMaster();
-        master.generateCodeClass(User.class);
+        master.generateCodeClass(Account.class);
     }
 }

@@ -1,12 +1,13 @@
 package belly.domain;
 
-import belly.domain.exceptions.ValidationException;
+import belly.User;
+import belly.exceptions.ValidationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static belly.domain.builders.UserBuilder.oneUser;
+import static belly.builders.UserBuilder.oneUser;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
