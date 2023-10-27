@@ -1,6 +1,7 @@
 package belly.service;
 
 import belly.domain.User;
+import belly.exceptions.ValidationException;
 import belly.service.repositories.UserRepository;
 
 public class UserService {
@@ -12,6 +13,9 @@ public class UserService {
     }
 
     public User save(User user) {
+        userRepository.getUserByEmail(user.getEmail()).ifPresent(user1 -> {
+            throw new ValidationException(String.format("User %s is already registered!", user.getEmail()));
+        });
         return userRepository.save(user);
     }
 }
