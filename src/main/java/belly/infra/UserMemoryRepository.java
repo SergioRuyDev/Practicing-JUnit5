@@ -6,7 +6,6 @@ import belly.service.repositories.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class UserMemoryRepository implements UserRepository {
 
@@ -30,10 +29,22 @@ public class UserMemoryRepository implements UserRepository {
     @Override
     public Optional<User> getUserByEmail(String email) {
         return users.stream()
-                .filter();
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
+
+    public void printUsers() {
+        System.out.println(users);
     }
 
     private Long nextId() {
         return ++currentId;
+    }
+
+    public static void main(String[] args) {
+        UserMemoryRepository repo = new UserMemoryRepository();
+        repo.printUsers();
+        repo.save(new User(null, "User wherever", "a@a.com", "aaa"));
+        repo.printUsers();
     }
 }
