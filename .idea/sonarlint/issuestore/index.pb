@@ -157,3 +157,5 @@ l
 ,src/main/java/belly/service/UserService.java,e/2/e28bf06b22f385136f37c30e8fbbdfaef4f0f8d1
 c
 3src/main/java/belly/infra/UserMemoryRepository.java,6/9/69780f2f0a070e28d6d46880dafda6eb459042ea
+v
+Fsrc/test/java/belly/infra/UserServiceWithUserMemoryRepositoryTest.java,c/3/c346997fb9caa473e69102ec8a61433176c1388a
