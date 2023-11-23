@@ -159,3 +159,7 @@ c
 3src/main/java/belly/infra/UserMemoryRepository.java,6/9/69780f2f0a070e28d6d46880dafda6eb459042ea
 v
 Fsrc/test/java/belly/infra/UserServiceWithUserMemoryRepositoryTest.java,c/3/c346997fb9caa473e69102ec8a61433176c1388a
+`
+0src/test/java/belly/service/UserServiceTest.java,c/f/cf829ff6c808abf14c4768015d42e663ea7789e3
+b
+2src/test/java/belly/infra/UserDummyRepository.java,1/5/15a874a0f2202421e8e3b81d36ae51b56b749b22
