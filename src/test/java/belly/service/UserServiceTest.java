@@ -1,21 +1,22 @@
 package belly.service;
 
 import belly.domain.User;
+import belly.exceptions.ValidationException;
 import belly.service.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
 import static belly.builders.UserBuilder.oneUser;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.endsWith;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
     @Mock
@@ -23,11 +24,6 @@ public class UserServiceTest {
 
     @InjectMocks
     private UserService service;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     //    @AfterEach
 //    void tearDown() {
@@ -74,5 +70,21 @@ public class UserServiceTest {
 
         verify(repository).getUserByEmail(userToSave.getEmail());
         verify(repository).save(userToSave);
+    }
+
+    @Test
+    public void shouldRejectExistedUser() {
+
+        User userToSave = oneUser().withId(null).createEntity();
+
+        when(repository.getUserByEmail(userToSave.getEmail()))
+                .thenReturn(Optional.of(oneUser().createEntity()));
+
+        ValidationException exception = assertThrows(ValidationException.class, () ->
+                service.save(userToSave));
+//        assertEquals(exception.getMessage(), String.format("User %s is already registered!", userToSave.getEmail()));assertEquals(exception.getMessage(), String.format("User %s is already registered!", userToSave.getEmail()));
+        assertTrue(exception.getMessage().endsWith("already registered!"));
+
+        verify(repository, never()).save(userToSave);
     }
 }
