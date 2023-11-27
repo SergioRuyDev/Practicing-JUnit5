@@ -9,9 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
 import static belly.builders.AccountBuilder.oneAccount;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -25,9 +24,24 @@ public class AccountServiceTest {
     private AccountRepository repository;
 
     @Test
-    void shouldSaveAccount() {
+    void shouldSaveFirstAccount() {
 
         Account accountToSave = oneAccount().withId(null).createEntity();
+
+        when(repository.save(accountToSave)).thenReturn(oneAccount().createEntity());
+
+        Account savedAccount = service.save(accountToSave);
+
+        assertNotNull(savedAccount.id());
+    }
+
+    @Test
+    void shouldSaveSecondAccount() {
+
+        Account accountToSave = oneAccount().withId(null).createEntity();
+
+        when(repository.getAccountByUser(accountToSave.id())).thenReturn(singletonList(oneAccount().withName("Other Account")
+                .createEntity()));
 
         when(repository.save(accountToSave)).thenReturn(oneAccount().createEntity());
 
@@ -41,12 +55,12 @@ public class AccountServiceTest {
 
         Account accountToSave = oneAccount().withId(null).createEntity();
 
-        when(repository.getByName(accountToSave.name())).thenReturn(Optional.of(oneAccount().createEntity()));
+        when(repository.getAccountByUser(accountToSave.id())).thenReturn(singletonList(oneAccount().createEntity()));
 
         ValidationException exception = assertThrows(ValidationException.class, () ->
                 service.save(accountToSave));
 
-        assertTrue(exception.getMessage().endsWith("already exists!"));
+        assertTrue(exception.getMessage().contains("Already exists"));
 
         verify(repository, never()).save(accountToSave);
     }
