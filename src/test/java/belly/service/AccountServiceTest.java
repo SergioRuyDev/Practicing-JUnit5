@@ -2,6 +2,7 @@ package belly.service;
 
 import belly.domain.Account;
 import belly.exceptions.ValidationException;
+import belly.service.events.AccountEvent;
 import belly.service.repositories.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static belly.builders.AccountBuilder.oneAccount;
+import static belly.service.events.AccountEvent.EventType.CREATED;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,12 +25,16 @@ public class AccountServiceTest {
     @Mock
     private AccountRepository repository;
 
+    @Mock
+    private AccountEvent event;
+
     @Test
     void shouldSaveFirstAccount() {
 
         Account accountToSave = oneAccount().withId(null).createEntity();
 
         when(repository.save(accountToSave)).thenReturn(oneAccount().createEntity());
+        doNothing().when(event).dispatch(oneAccount().createEntity(), CREATED);
 
         Account savedAccount = service.save(accountToSave);
 
