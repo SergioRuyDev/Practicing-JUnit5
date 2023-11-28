@@ -6,6 +6,8 @@ import belly.service.events.AccountEvent;
 import belly.service.repositories.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -28,17 +30,23 @@ public class AccountServiceTest {
     @Mock
     private AccountEvent event;
 
+    @Captor
+    private ArgumentCaptor<Account> argumentCaptor;
+
     @Test
     void shouldSaveFirstAccount() throws Exception {
 
         Account accountToSave = oneAccount().withId(null).createEntity();
 
-        when(repository.save(accountToSave)).thenReturn(oneAccount().createEntity());
+        when(repository.save(any(Account.class))).thenReturn(oneAccount().createEntity());
         doNothing().when(event).dispatch(oneAccount().createEntity(), CREATED);
 
         Account savedAccount = service.save(accountToSave);
 
         assertNotNull(savedAccount.id());
+
+        verify(repository).save(argumentCaptor.capture());
+        assertTrue(argumentCaptor.getValue().name().contains("Valid Account"));
     }
 
     @Test
@@ -49,11 +57,13 @@ public class AccountServiceTest {
         when(repository.getAccountByUser(accountToSave.id())).thenReturn(singletonList(oneAccount().withName("Other Account")
                 .createEntity()));
 
-        when(repository.save(accountToSave)).thenReturn(oneAccount().createEntity());
+        when(repository.save(any(Account.class))).thenReturn(oneAccount().createEntity());
 
         Account savedAccount = service.save(accountToSave);
 
         assertNotNull(savedAccount.id());
+        verify(repository).save(argumentCaptor.capture());
+        assertTrue(argumentCaptor.getValue().name().contains("Valid Account"));
     }
 
     @Test
@@ -77,7 +87,7 @@ public class AccountServiceTest {
         Account accountToSave = oneAccount().withId(null).createEntity();
         Account accountSaved = oneAccount().createEntity();
 
-        when(repository.save(accountToSave)).thenReturn(accountSaved);
+        when(repository.save(any(Account.class))).thenReturn(accountSaved);
         doThrow(new Exception("Event Failed")).when(event).dispatch(oneAccount().createEntity(), CREATED);
 
         String message = assertThrows(Exception.class, () -> service.save(accountToSave))

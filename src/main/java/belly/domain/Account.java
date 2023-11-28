@@ -42,4 +42,13 @@ public class Account {
     public int hashCode() {
         return Objects.hash(name, user);
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

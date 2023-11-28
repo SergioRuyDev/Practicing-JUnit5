@@ -5,6 +5,7 @@ import belly.exceptions.ValidationException;
 import belly.service.events.AccountEvent;
 import belly.service.repositories.AccountRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,8 @@ public class AccountService {
                 throw new ValidationException("Already exists user with this name.");
         });
 
-        Account accountSaved = accountRepository.save(account);
+        Account accountSaved = accountRepository.save(
+                new Account(account.id(), account.name() + LocalDateTime.now(), account.user()));
         try {
             event.dispatch(accountSaved, CREATED);
         } catch (Exception exception) {
