@@ -30,7 +30,12 @@ public class AccountService {
         });
 
         Account accountSaved = accountRepository.save(account);
-        event.dispatch(accountSaved, CREATED);
+        try {
+            event.dispatch(accountSaved, CREATED);
+        } catch (Exception exception) {
+            accountRepository.delete(accountSaved);
+            throw new RuntimeException("Failed to create account, try again.");
+        }
         return accountSaved;
     }
 

@@ -29,7 +29,7 @@ public class AccountServiceTest {
     private AccountEvent event;
 
     @Test
-    void shouldSaveFirstAccount() {
+    void shouldSaveFirstAccount() throws Exception {
 
         Account accountToSave = oneAccount().withId(null).createEntity();
 
@@ -69,5 +69,21 @@ public class AccountServiceTest {
         assertTrue(exception.getMessage().contains("Already exists"));
 
         verify(repository, never()).save(accountToSave);
+    }
+
+    @Test
+    void shouldNotSaveAccountWithoutEvent() throws Exception {
+
+        Account accountToSave = oneAccount().withId(null).createEntity();
+        Account accountSaved = oneAccount().createEntity();
+
+        when(repository.save(accountToSave)).thenReturn(accountSaved);
+        doThrow(new Exception("Event Failed")).when(event).dispatch(oneAccount().createEntity(), CREATED);
+
+        String message = assertThrows(Exception.class, () -> service.save(accountToSave))
+                .getMessage();
+
+        assertEquals("Failed to create account, try again.", message);
+        verify(repository).delete(accountSaved);
     }
 }

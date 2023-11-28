@@ -12,4 +12,6 @@ public interface AccountRepository {
     Optional<Account> getByName(String name);
 
     List<Account> getAccountByUser(Long userId);
+
+    void delete(Account account);
 }
