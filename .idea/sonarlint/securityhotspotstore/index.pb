@@ -1559,3 +1559,9 @@ w
 G.idea/sonarlint/issuestore/1/c/1c3f1a94720823403baa482269c19fa690cc593e,6/4/64c1e861ea5e1f62de97a491b1a9f4a92b204bfa
 d
 4src/main/java/belly/service/events/AccountEvent.java,4/1/41a594ccc721a4471627ad1762e4a55c8f862ff5
+[
++src/main/java/belly/domain/Transaction.java,5/f/5f70974e8b81174b68753fa2619f82f922432859
+c
+3src/main/java/belly/service/TransactionService.java,e/0/e074d3f332710863fe1e626186d71e02054dd192
+l
+<src/main/java/belly/service/repositories/TransactionDao.java,8/f/8fdcdc40e6ad37f0a12ab43b5f59e8b561547484
