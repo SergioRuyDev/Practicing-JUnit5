@@ -11,7 +11,7 @@ import belly.domain.Transaction;
 
 public class TransactionBuilder {
     private Transaction element;
-    private TransactionBuilder(){}
+    public TransactionBuilder(){}
 
     public static TransactionBuilder oneTransaction() {
         TransactionBuilder builder = new TransactionBuilder();
@@ -24,11 +24,11 @@ public class TransactionBuilder {
         Transaction element = builder.element;
 
 
-        element.setId(0L);
-        element.setDescription("");
-        element.setValue(0.0);
-        element.setAccount(null);
-        element.setDate(null);
+        element.setId(1L);
+        element.setDescription("Valid Transaction");
+        element.setValue(10.0);
+        element.setAccount(AccountBuilder.oneAccount().createEntity());
+        element.setDate(LocalDate.now());
         element.setStatus(false);
     }
 
