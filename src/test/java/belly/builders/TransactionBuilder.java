@@ -11,7 +11,7 @@ import belly.domain.Transaction;
 
 public class TransactionBuilder {
     private Transaction element;
-    private TransactionBuilder(){}
+    public TransactionBuilder(){}
 
     public static TransactionBuilder oneTransaction() {
         TransactionBuilder builder = new TransactionBuilder();
