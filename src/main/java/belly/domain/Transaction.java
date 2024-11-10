@@ -1,6 +1,7 @@
 package belly.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Transaction {
 
@@ -58,5 +59,20 @@ public class Transaction {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transaction that)) return false;
+        return Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getValue(), that.getValue())
+                && Objects.equals(getAccount(), that.getAccount()) && Objects.equals(getDate(), that.getDate())
+                && Objects.equals(getStatus(), that.getStatus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDescription(), getValue(), getAccount(), getDate(), getStatus());
+    }
+
     // POJO
 }
