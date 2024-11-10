@@ -64,29 +64,11 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Transaction that)) return false;
-        return Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getValue(), that.getValue())
-                && Objects.equals(getAccount(), that.getAccount()) && Objects.equals(getDate(), that.getDate())
-                && Objects.equals(getStatus(), that.getStatus());
+        return Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getValue(), that.getValue()) && Objects.equals(getAccount(), that.getAccount()) && Objects.equals(getDate(), that.getDate()) && Objects.equals(getStatus(), that.getStatus());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getDescription(), getValue(), getAccount(), getDate(), getStatus());
-    }
-
-    // POJO
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
-        return Objects.equals(description, that.description) && Objects.equals(value, that.value) && Objects.equals(account, that.account) && Objects.equals(date, that.date) && Objects.equals(status, that.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(description, value, account, date, status);
     }
 }

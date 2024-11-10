@@ -12,14 +12,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import static belly.builders.TransactionBuilder.oneTransaction;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TransactionServiceTest {
@@ -35,25 +37,35 @@ public class TransactionServiceTest {
         Transaction transactionToSave = oneTransaction().withId(null).createEntity();
         when(dao.save(transactionToSave)).thenReturn(oneTransaction().createEntity());
 
-        Transaction transactionSaved = service.save(transactionToSave);
+        LocalDateTime desireDate = LocalDateTime.of(2024, 1, 1, 4, 30, 28);
+        System.out.println(desireDate);
 
-        assertEquals(oneTransaction().createEntity(), transactionSaved);
+        try(MockedStatic<LocalDateTime> ldt = mockStatic(LocalDateTime.class)) {
+//            ldt.when(() -> LocalDateTime.now()).thenReturn(desireDate);
+            ldt.when(LocalDateTime::now).thenReturn(desireDate);
+            System.out.println(desireDate);
 
-        assertAll("Transaction",
-                () -> assertEquals(1L, transactionSaved.getId()),
-                () -> assertEquals("Valid Transaction", transactionSaved.getDescription()),
-                () -> {
-            assertAll("Account",
-                    () -> assertEquals("Valid Account", transactionSaved.getAccount().name()),
+            Transaction transactionSaved = service.save(transactionToSave);
+
+            assertEquals(oneTransaction().createEntity(), transactionSaved);
+
+            assertAll("Transaction",
+                    () -> assertEquals(1L, transactionSaved.getId()),
+                    () -> assertEquals("Valid Transaction", transactionSaved.getDescription()),
                     () -> {
-                assertAll("User",
-                        () -> assertEquals("Valid User", transactionSaved.getAccount().user().getName()),
-                        () -> assertEquals("123456", transactionSaved.getAccount().user().getPassword())
-                    );
-                  }
-                );
-            }
-        );
+                        assertAll("Account",
+                                () -> assertEquals("Valid Account", transactionSaved.getAccount().name()),
+                                () -> {
+                                    assertAll("User",
+                                            () -> assertEquals("Valid User", transactionSaved.getAccount().user().getName()),
+                                            () -> assertEquals("123456", transactionSaved.getAccount().user().getPassword())
+                                    );
+                                }
+                        );
+                    }
+            );
+            ldt.verify(LocalDateTime::now);
+        }
     }
 
     @ParameterizedTest(name = "{6}")
